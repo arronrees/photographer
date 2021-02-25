@@ -36,7 +36,8 @@ function imageParallaxScroll() {
 
   images.forEach((img) => {
     gsap.to(img, {
-      yPercent: 20,
+      scale: 1,
+      yPercent: -20,
       ease: 'none',
       scrollTrigger: {
         trigger: img,
