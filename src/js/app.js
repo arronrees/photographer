@@ -1,3 +1,4 @@
+gsap.registerPlugin(ScrollTrigger);
 //
 // nav slide
 //
@@ -27,7 +28,28 @@ function navItemUnderline() {
     };
   });
 }
+//
+// image parralax on scroll
+//
+function imageParallaxScroll() {
+  const images = document.querySelectorAll('img');
 
+  images.forEach((img) => {
+    gsap.to(img, {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: img,
+        start: 'top bottom',
+        scrub: true,
+      },
+    });
+  });
+}
+imageParallaxScroll();
+//
+// call functions on load
+//
 window.addEventListener('load', () => {
   navSlide();
   navItemUnderline();
