@@ -9,7 +9,26 @@ function navSlide() {
     nav.classList.toggle('nav--open');
   });
 }
+//
+// nav underline on hover
+//
+function navItemUnderline() {
+  const navItems = document.querySelectorAll('.nav__item');
+  console.log(navItems);
+  navItems.forEach((item) => {
+    item.addEventListener('mouseleave', (e) => {
+      // Add class
+      item.classList.add('animate-out');
+    });
+    // Remove class
+    item.ontransitionend = () => {
+      //remove class
+      item.classList.remove('animate-out');
+    };
+  });
+}
 
 window.addEventListener('load', () => {
   navSlide();
+  navItemUnderline();
 });

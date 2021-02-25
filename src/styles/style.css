@@ -270,7 +270,38 @@ header {
 
 .nav__menu .nav__item {
   padding: 2rem 0;
-  z-index: 5;
+  overflow: hidden;
+  position: relative;
+}
+
+.nav__menu .nav__item:after {
+  display: block;
+  content: '';
+  height: 2px;
+  background-color: var(--black);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translateX(-101%);
+          transform: translateX(-101%);
+}
+
+.nav__menu .nav__item:hover::after {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.nav__menu .nav__item.animate-out::after {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
 }
 
 @media (min-width: 1024px) {
