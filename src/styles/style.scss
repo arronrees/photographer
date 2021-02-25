@@ -1,0 +1,49 @@
+@import './reset';
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --font-family: 'Playfair Display', serif;
+  --black: #000;
+  --white: #fff;
+
+  --font-xs: 1rem;
+  --font-sm: 1.5rem;
+  --font-md: 2rem;
+  --font-lg: 3rem;
+  --font-xl: 6rem;
+}
+
+@media (min-width: 550px) {
+  :root {
+    --font-xl: 8rem;
+  }
+}
+@media (min-width: 900px) {
+  :root {
+    --font-xl: 9rem;
+  }
+}
+@media (min-width: 1200px) {
+  :root {
+    --font-xl: 10rem;
+  }
+}
+@media (min-width: 1366px) {
+  :root {
+    --font-xl: 12rem;
+  }
+}
+
+body {
+  font-family: var(--font-family);
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+@import './header';
+@import './hero';
+@import './main';
+@import './footer';
