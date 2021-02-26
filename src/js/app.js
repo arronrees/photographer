@@ -25,7 +25,6 @@ function navSlide() {
     }
   });
 }
-
 function openNav(nav, navItems, lines, main) {
   navOpen = !navOpen;
   const openTl = gsap.timeline({
@@ -97,47 +96,6 @@ function navItemUnderline() {
 }
 
 //
-// image parralax on scroll
-//
-function imageParallaxScroll() {
-  const images = document.querySelectorAll('img');
-
-  images.forEach((img) => {
-    gsap.to(img, {
-      scale: 1,
-      yPercent: -20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: img,
-        start: 'top bottom',
-        scrub: true,
-      },
-    });
-  });
-}
-imageParallaxScroll();
-
-//
-// skew on scroll
-//
-const images = document.querySelectorAll('figure');
-let currentPixel = window.pageYOffset;
-const imgSkewScroll = () => {
-  const newPixel = window.pageYOffset;
-  const diff = newPixel - currentPixel;
-
-  const speed = diff * 0.075;
-
-  images.forEach((img) => {
-    img.style.transform = `skewY(${speed}deg)`;
-  });
-
-  currentPixel = newPixel;
-
-  requestAnimationFrame(imgSkewScroll);
-};
-
-//
 // project title fade in on scroll
 //
 function projectTitleEnter() {
@@ -156,13 +114,73 @@ function projectTitleEnter() {
 
     ScrollTrigger.create({
       trigger: project,
-      start: 'top 80%',
+      start: 'top 70%',
       onEnter: () => {
         tl.to(text, { yPercent: 0, stagger: 0.1 });
       },
     });
   });
 }
+
+//
+// image enter on scroll
+//
+function imageEnterScroll() {
+  const projects = document.querySelectorAll('.project');
+  const images = document.querySelectorAll('.project img');
+  const imageMask = document.querySelectorAll('.project figure');
+
+  projects.forEach((el, i) => {
+    gsap.set(images, { yPercent: -120 });
+    gsap.set(imageMask, { yPercent: 100 });
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 60%',
+      onEnter: () => {
+        gsap.to([images[i], imageMask[i]], {
+          yPercent: 0,
+          duration: 1,
+        });
+      },
+    });
+  });
+}
+
+//
+// hero image parralax on scroll
+//
+function imageParallaxScroll() {
+  gsap.to('.hero__img img', {
+    scale: 1,
+    yPercent: -20,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero__img img',
+      start: `top bottom`,
+      scrub: true,
+    },
+  });
+}
+
+//
+// skew on scroll
+//
+const projectImages = document.querySelectorAll('.projects figure');
+let currentPixel = window.pageYOffset;
+const imgSkewScroll = () => {
+  const newPixel = window.pageYOffset;
+  const diff = newPixel - currentPixel;
+
+  const speed = diff * 0.075;
+
+  projectImages.forEach((img) => {
+    img.style.transform = `skewY(${speed}deg)`;
+  });
+
+  currentPixel = newPixel;
+
+  requestAnimationFrame(imgSkewScroll);
+};
 
 //
 // call functions on load
@@ -172,4 +190,6 @@ window.addEventListener('load', () => {
   navItemUnderline();
   imgSkewScroll();
   projectTitleEnter();
+  imageParallaxScroll();
+  imageEnterScroll();
 });

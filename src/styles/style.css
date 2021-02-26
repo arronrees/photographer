@@ -145,10 +145,6 @@ a {
   text-decoration: none;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 :root {
   --font-family: 'Playfair Display', serif;
   --black: #000;
