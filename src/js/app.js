@@ -52,7 +52,7 @@ function openNav(nav, navItems, lines, main) {
       },
       0
     )
-    .to(navItems, { yPercent: 0, stagger: 0.2, duration: 0.8 });
+    .to(navItems, { yPercent: 0, stagger: 0.2, duration: 0.8 }, 0.5);
 }
 function closeNav(nav, navItems, lines, main) {
   navOpen = !navOpen;
@@ -114,7 +114,7 @@ function projectTitleEnter() {
 
     ScrollTrigger.create({
       trigger: project,
-      start: 'top 70%',
+      start: 'top center',
       onEnter: () => {
         tl.to(text, { yPercent: 0, stagger: 0.1 });
       },
@@ -135,11 +135,14 @@ function imageEnterScroll() {
     gsap.set(imageMask, { yPercent: 100 });
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 60%',
+      start: 'top center',
       onEnter: () => {
         gsap.to([images[i], imageMask[i]], {
           yPercent: 0,
           duration: 1,
+          onComplete: () => {
+            imageParallaxScroll(images[i]);
+          },
         });
       },
     });
@@ -149,14 +152,14 @@ function imageEnterScroll() {
 //
 // hero image parralax on scroll
 //
-function imageParallaxScroll() {
-  gsap.to('.hero__img img', {
+function imageParallaxScroll(image) {
+  gsap.to(image, {
     scale: 1,
-    yPercent: -20,
+    yPercent: 20,
     ease: 'none',
     scrollTrigger: {
-      trigger: '.hero__img img',
-      start: `top bottom`,
+      trigger: image,
+      start: `top top`,
       scrub: true,
     },
   });
@@ -183,13 +186,44 @@ const imgSkewScroll = () => {
 };
 
 //
+// init smooth scrollbar
+//
+let bodyScrollBar;
+
+function initSmoothScrollbar() {
+  bodyScrollBar = Scrollbar.init(document.querySelector('#scroll__content'), {
+    damping: 0.07,
+  });
+
+  // remove horizontal scrollbar
+  bodyScrollBar.track.xAxis.element.remove();
+
+  // keep ScrollTrigger in sync with smooth scrollbar
+  ScrollTrigger.scrollerProxy(document.body, {
+    scrollTop(value) {
+      if (arguments.length) {
+        bodyScrollBar.scrollTop = value; // setter
+      }
+      return bodyScrollBar.scrollTop; // getter
+    },
+  });
+
+  // when the smooth scroller updates, tell ScrollTrigger to update() too:
+  bodyScrollBar.addListener(ScrollTrigger.update);
+}
+
+if (window.innerWidth > 1024) {
+  initSmoothScrollbar();
+}
+
+//
 // call functions on load
 //
 window.addEventListener('load', () => {
   navSlide();
   navItemUnderline();
-  imgSkewScroll();
+  // imgSkewScroll();
   projectTitleEnter();
-  imageParallaxScroll();
+  imageParallaxScroll('.hero__img img');
   imageEnterScroll();
 });

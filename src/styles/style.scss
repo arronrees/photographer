@@ -1,8 +1,8 @@
 @import './reset';
 
-// ::-webkit-scrollbar {
-//   display: none;
-// }
+::-webkit-scrollbar {
+  display: none;
+}
 
 :root {
   --font-family: 'Playfair Display', serif;
@@ -16,6 +16,10 @@
   --font-xl: 6rem;
 }
 
+body {
+  position: relative;
+}
+
 @media (min-width: 550px) {
   :root {
     --font-xl: 8rem;
@@ -24,6 +28,25 @@
 @media (min-width: 900px) {
   :root {
     --font-xl: 9rem;
+  }
+}
+@media (min-width: 1024px) {
+  .scrollbar-track {
+    background-color: var(--white);
+  }
+
+  .scrollbar-thumb {
+    background-color: var(--black);
+    width: 0.25rem;
+  }
+
+  #scroll__content {
+    overflow: hidden;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
   }
 }
 @media (min-width: 1200px) {
