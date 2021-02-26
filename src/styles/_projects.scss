@@ -15,6 +15,10 @@
     flex-direction: column;
     font-size: var(--font-lg);
     padding-bottom: 0.5rem;
+
+    .text__mask {
+      overflow: hidden;
+    }
   }
 
   .project__img {
@@ -49,9 +53,8 @@
 
 @media (min-width: 1200px) {
   .projects {
-    padding: 2rem;
-    gap: 6rem;
-    grid-template-columns: repeat(3, 1fr);
+    padding: 6rem;
+    column-gap: 6rem;
   }
 
   .project {

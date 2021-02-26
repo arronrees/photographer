@@ -400,6 +400,10 @@ header {
   padding-bottom: 0.5rem;
 }
 
+.project .project__title .text__mask {
+  overflow: hidden;
+}
+
 .project .project__img figure {
   height: 50vh;
   overflow: hidden;
@@ -435,10 +439,9 @@ header {
 
 @media (min-width: 1200px) {
   .projects {
-    padding: 2rem;
-    gap: 6rem;
-    -ms-grid-columns: (1fr)[3];
-        grid-template-columns: repeat(3, 1fr);
+    padding: 6rem;
+    -webkit-column-gap: 6rem;
+            column-gap: 6rem;
   }
   .project .project__title {
     padding-bottom: 1rem;

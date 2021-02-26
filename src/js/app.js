@@ -10,12 +10,13 @@ function navSlide() {
     nav.classList.toggle('nav--open');
   });
 }
+
 //
 // nav underline on hover
 //
 function navItemUnderline() {
   const navItems = document.querySelectorAll('.nav__item');
-  console.log(navItems);
+
   navItems.forEach((item) => {
     item.addEventListener('mouseleave', (e) => {
       // Add class
@@ -28,6 +29,7 @@ function navItemUnderline() {
     };
   });
 }
+
 //
 // image parralax on scroll
 //
@@ -48,10 +50,32 @@ function imageParallaxScroll() {
   });
 }
 imageParallaxScroll();
+
+//
+// skew on scroll
+//
+const images = document.querySelectorAll('figure');
+let currentPixel = window.pageYOffset;
+const imgSkewScroll = () => {
+  const newPixel = window.pageYOffset;
+  const diff = newPixel - currentPixel;
+
+  const speed = diff * 0.075;
+
+  images.forEach((img) => {
+    img.style.transform = `skewY(${speed}deg)`;
+  });
+
+  currentPixel = newPixel;
+
+  requestAnimationFrame(imgSkewScroll);
+};
+
 //
 // call functions on load
 //
 window.addEventListener('load', () => {
   navSlide();
   navItemUnderline();
+  imgSkewScroll();
 });
