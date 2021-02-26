@@ -145,6 +145,10 @@ a {
   text-decoration: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --font-family: 'Playfair Display', serif;
   --black: #000;
@@ -185,6 +189,10 @@ body {
   text-transform: uppercase;
   color: var(--black);
   overflow-x: hidden;
+}
+
+body.nav--open {
+  overflow-y: hidden;
 }
 
 header {
@@ -230,18 +238,9 @@ header {
   width: 100vw;
   height: 100vh;
   z-index: 5;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-  -webkit-transition: -webkit-transform 1s ease;
-  transition: -webkit-transform 1s ease;
-  transition: transform 1s ease;
-  transition: transform 1s ease, -webkit-transform 1s ease;
   background-color: var(--white);
-}
-
-.main__nav.nav--open {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
+  -webkit-box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
 }
 
 .nav__menu {
@@ -270,6 +269,10 @@ header {
   padding: 2rem 0;
   overflow: hidden;
   position: relative;
+}
+
+.nav__menu .nav__item a {
+  display: block;
 }
 
 .nav__menu .nav__item:after {

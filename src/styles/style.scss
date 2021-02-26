@@ -1,8 +1,8 @@
 @import './reset';
 
-// ::-webkit-scrollbar {
-//   display: none;
-// }
+::-webkit-scrollbar {
+  display: none;
+}
 
 :root {
   --font-family: 'Playfair Display', serif;
@@ -42,6 +42,10 @@ body {
   text-transform: uppercase;
   color: var(--black);
   overflow-x: hidden;
+
+  &.nav--open {
+    overflow-y: hidden;
+  }
 }
 
 @import './header';

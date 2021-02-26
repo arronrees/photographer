@@ -2,13 +2,79 @@ gsap.registerPlugin(ScrollTrigger);
 //
 // nav slide
 //
+let navOpen = false;
 function navSlide() {
   const burger = document.querySelector('.burger__menu');
   const nav = document.querySelector('.main__nav');
+  const navItems = document.querySelectorAll('.nav__item a');
+  const body = document.body;
+  const lines = document.querySelectorAll('.burger__menu .line');
+  const main = document.querySelector('main');
+
+  gsap.set(nav, { yPercent: -100 });
+
+  gsap.set(navItems, { yPercent: 200 });
 
   burger.addEventListener('click', () => {
-    nav.classList.toggle('nav--open');
+    if (!navOpen) {
+      body.classList.add('nav--open');
+      openNav(nav, navItems, lines, main);
+    } else {
+      body.classList.remove('nav--open');
+      closeNav(nav, navItems, lines, main);
+    }
   });
+}
+
+function openNav(nav, navItems, lines, main) {
+  navOpen = !navOpen;
+  const openTl = gsap.timeline({
+    defaults: { duration: 1, ease: 'power1.inOut' },
+  });
+
+  openTl
+    .to(main, { y: 100 })
+    .fromTo(nav, { yPercent: -100 }, { yPercent: 0 }, 0)
+    .to(
+      lines[0],
+      {
+        duration: 0.2,
+        rotate: -45,
+        translateY: 3,
+      },
+      0
+    )
+    .to(
+      lines[1],
+      {
+        duration: 0.2,
+        rotate: 45,
+        translateY: -3,
+      },
+      0
+    )
+    .to(navItems, { yPercent: 0, stagger: 0.2, duration: 0.8 });
+}
+function closeNav(nav, navItems, lines, main) {
+  navOpen = !navOpen;
+  const closeTl = gsap.timeline({
+    defaults: { duration: 0.8, ease: 'power1.inOut' },
+  });
+
+  closeTl
+    .to(navItems, { yPercent: 200, stagger: 0.1, duration: 0.4 })
+    .to(nav, { yPercent: 100 }, 0.7)
+    .to(nav, { yPercent: -100, duration: 0 })
+    .fromTo(main, { y: -100 }, { y: 0 }, 0.7)
+    .to(
+      lines,
+      {
+        duration: 0.2,
+        rotate: 0,
+        translateY: 0,
+      },
+      0.7
+    );
 }
 
 //
@@ -92,7 +158,7 @@ function projectTitleEnter() {
       trigger: project,
       start: 'top 80%',
       onEnter: () => {
-        tl.to(text, { yPercent: 0 });
+        tl.to(text, { yPercent: 0, stagger: 0.1 });
       },
     });
   });
