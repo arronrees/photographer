@@ -72,10 +72,38 @@ const imgSkewScroll = () => {
 };
 
 //
+// project title fade in on scroll
+//
+function projectTitleEnter() {
+  const projects = document.querySelectorAll('.project');
+
+  const tl = gsap.timeline({
+    defaults: {
+      duration: 0.6,
+      ease: 'power1.out',
+    },
+  });
+
+  projects.forEach((project) => {
+    const text = project.querySelectorAll('.text__mask div');
+    gsap.set(text, { yPercent: 100 });
+
+    ScrollTrigger.create({
+      trigger: project,
+      start: 'top 80%',
+      onEnter: () => {
+        tl.to(text, { yPercent: 0 });
+      },
+    });
+  });
+}
+
+//
 // call functions on load
 //
 window.addEventListener('load', () => {
   navSlide();
   navItemUnderline();
   imgSkewScroll();
+  projectTitleEnter();
 });

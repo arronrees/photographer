@@ -1,1 +1,18 @@
 @import './projects';
+
+.about {
+  width: 80%;
+  margin: 0 auto;
+  padding: 4rem 0;
+  text-align: center;
+  text-transform: lowercase;
+  font-style: italic;
+  line-height: 1.5;
+  font-size: var(--font-xs);
+}
+
+@media (min-width: 900px) {
+  .about {
+    font-size: var(--font-md);
+  }
+}

@@ -1,12 +1,13 @@
 .projects {
   padding: 0.5rem;
+  padding-bottom: 0;
 
   display: grid;
   grid-template-columns: 1fr;
 }
 
 .project {
-  padding: 2rem 0;
+  padding-top: 4rem;
   display: flex;
   flex-direction: column;
 
@@ -46,6 +47,7 @@
 @media (min-width: 900px) {
   .projects {
     padding: 1rem;
+    padding-bottom: 0;
     gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
   }
@@ -54,6 +56,7 @@
 @media (min-width: 1200px) {
   .projects {
     padding: 6rem;
+    padding-bottom: 0;
     column-gap: 6rem;
   }
 

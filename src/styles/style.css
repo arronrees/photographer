@@ -207,6 +207,7 @@ header {
 
 .header__logo {
   position: relative;
+  z-index: 6;
 }
 
 .burger__menu {
@@ -371,6 +372,7 @@ header {
 
 .projects {
   padding: 0.5rem;
+  padding-bottom: 0;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr;
@@ -378,7 +380,7 @@ header {
 }
 
 .project {
-  padding: 2rem 0;
+  padding-top: 4rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -431,6 +433,7 @@ header {
 @media (min-width: 900px) {
   .projects {
     padding: 1rem;
+    padding-bottom: 0;
     gap: 1rem;
     -ms-grid-columns: (1fr)[2];
         grid-template-columns: repeat(2, 1fr);
@@ -440,6 +443,7 @@ header {
 @media (min-width: 1200px) {
   .projects {
     padding: 6rem;
+    padding-bottom: 0;
     -webkit-column-gap: 6rem;
             column-gap: 6rem;
   }
@@ -456,6 +460,23 @@ header {
   .project3 .project__img figure,
   .project4 .project__img figure {
     height: 80vh;
+  }
+}
+
+.about {
+  width: 80%;
+  margin: 0 auto;
+  padding: 4rem 0;
+  text-align: center;
+  text-transform: lowercase;
+  font-style: italic;
+  line-height: 1.5;
+  font-size: var(--font-xs);
+}
+
+@media (min-width: 900px) {
+  .about {
+    font-size: var(--font-md);
   }
 }
 
