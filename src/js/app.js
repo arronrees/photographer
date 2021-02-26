@@ -1,5 +1,34 @@
 gsap.registerPlugin(ScrollTrigger);
 //
+// init smooth scrollbar
+//
+let bodyScrollBar;
+function initSmoothScrollbar() {
+  bodyScrollBar = Scrollbar.init(document.querySelector('#scroll__content'), {
+    damping: 0.07,
+  });
+
+  // remove horizontal scrollbar
+  bodyScrollBar.track.xAxis.element.remove();
+
+  // keep ScrollTrigger in sync with smooth scrollbar
+  ScrollTrigger.scrollerProxy(document.body, {
+    scrollTop(value) {
+      if (arguments.length) {
+        bodyScrollBar.scrollTop = value; // setter
+      }
+      return bodyScrollBar.scrollTop; // getter
+    },
+  });
+
+  // when the smooth scroller updates, tell ScrollTrigger to update() too:
+  bodyScrollBar.addListener(ScrollTrigger.update);
+}
+if (window.innerWidth > 1024) {
+  initSmoothScrollbar();
+}
+
+//
 // nav slide
 //
 let navOpen = false;
@@ -186,34 +215,43 @@ const imgSkewScroll = () => {
 };
 
 //
-// init smooth scrollbar
+// hero name enter animation
 //
-let bodyScrollBar;
+function heroNameEnter() {
+  const text = document.querySelector('.hero__text h1');
+  const textContent = text.textContent;
+  const splitText = textContent.split('');
+  text.textContent = '';
 
-function initSmoothScrollbar() {
-  bodyScrollBar = Scrollbar.init(document.querySelector('#scroll__content'), {
-    damping: 0.07,
+  splitText.forEach((letter) => {
+    // Adds space for multiple words
+    if (letter === ' ') {
+      text.innerHTML += `<span style="width: 3rem">${letter}</span>`;
+    } else {
+      text.innerHTML += `<span>${letter}</span>`;
+    }
   });
 
-  // remove horizontal scrollbar
-  bodyScrollBar.track.xAxis.element.remove();
+  let char = 0;
+  const span = text.querySelectorAll('span');
+  gsap.set(span, { autoAlpha: 0, yPercent: 100 });
 
-  // keep ScrollTrigger in sync with smooth scrollbar
-  ScrollTrigger.scrollerProxy(document.body, {
-    scrollTop(value) {
-      if (arguments.length) {
-        bodyScrollBar.scrollTop = value; // setter
-      }
-      return bodyScrollBar.scrollTop; // getter
-    },
-  });
+  const int = setInterval(() => {
+    const currentSpan = span[char];
+    gsap.to(currentSpan, {
+      yPercent: 0,
+      autoAlpha: 1,
+      duration: 0.8,
+      ease: 'power1.out',
+    });
 
-  // when the smooth scroller updates, tell ScrollTrigger to update() too:
-  bodyScrollBar.addListener(ScrollTrigger.update);
-}
+    char++;
 
-if (window.innerWidth > 1024) {
-  initSmoothScrollbar();
+    if (char === splitText.length) {
+      clearInterval(int);
+      return;
+    }
+  }, 100);
 }
 
 //
@@ -226,4 +264,5 @@ window.addEventListener('load', () => {
   projectTitleEnter();
   imageParallaxScroll('.hero__img img');
   imageEnterScroll();
+  heroNameEnter();
 });

@@ -160,10 +160,6 @@ a {
   --font-xl: 6rem;
 }
 
-body {
-  position: relative;
-}
-
 @media (min-width: 550px) {
   :root {
     --font-xl: 8rem;
@@ -177,13 +173,6 @@ body {
 }
 
 @media (min-width: 1024px) {
-  .scrollbar-track {
-    background-color: var(--white);
-  }
-  .scrollbar-thumb {
-    background-color: var(--black);
-    width: 0.25rem;
-  }
   #scroll__content {
     overflow: hidden;
     position: fixed;
@@ -355,6 +344,13 @@ header {
 .hero__text h1 {
   font-size: var(--font-xl);
   padding-bottom: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.hero__text h1 span {
+  display: inline-block;
 }
 
 .hero__text h3 {
