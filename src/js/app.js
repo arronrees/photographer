@@ -195,30 +195,9 @@ function imageParallaxScroll(image) {
 }
 
 //
-// skew on scroll
-//
-const projectImages = document.querySelectorAll('.projects figure');
-let currentPixel = window.pageYOffset;
-const imgSkewScroll = () => {
-  const newPixel = window.pageYOffset;
-  const diff = newPixel - currentPixel;
-
-  const speed = diff * 0.075;
-
-  projectImages.forEach((img) => {
-    img.style.transform = `skewY(${speed}deg)`;
-  });
-
-  currentPixel = newPixel;
-
-  requestAnimationFrame(imgSkewScroll);
-};
-
-//
 // hero name enter animation
 //
-function heroNameEnter() {
-  const text = document.querySelector('.hero__text h1');
+function textEnter(text) {
   const textContent = text.textContent;
   const splitText = textContent.split('');
   text.textContent = '';
@@ -260,9 +239,9 @@ function heroNameEnter() {
 window.addEventListener('load', () => {
   navSlide();
   navItemUnderline();
-  // imgSkewScroll();
   projectTitleEnter();
   imageParallaxScroll('.hero__img img');
   imageEnterScroll();
-  heroNameEnter();
+  textEnter(document.querySelectorAll('.hero__text div')[0]);
+  textEnter(document.querySelectorAll('.hero__text div')[1]);
 });
