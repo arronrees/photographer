@@ -58,6 +58,10 @@ body {
   }
 }
 
+.text__mask {
+  overflow: hidden;
+}
+
 @import './header';
 @import './hero';
 @import './main';

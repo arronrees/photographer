@@ -5,7 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 let bodyScrollBar;
 function initSmoothScrollbar() {
   bodyScrollBar = Scrollbar.init(document.querySelector('#scroll__content'), {
-    damping: 0.07,
+    damping: 0.05,
   });
 
   // remove horizontal scrollbar
@@ -130,13 +130,6 @@ function navItemUnderline() {
 function projectTitleEnter() {
   const projects = document.querySelectorAll('.project');
 
-  const tl = gsap.timeline({
-    defaults: {
-      duration: 0.6,
-      ease: 'power1.out',
-    },
-  });
-
   projects.forEach((project) => {
     const text = project.querySelectorAll('.text__mask div');
     gsap.set(text, { yPercent: 100 });
@@ -145,7 +138,12 @@ function projectTitleEnter() {
       trigger: project,
       start: 'top center',
       onEnter: () => {
-        tl.to(text, { yPercent: 0, stagger: 0.1 });
+        gsap.to(text, {
+          yPercent: 0,
+          stagger: 0.1,
+          duration: 0.6,
+          ease: 'power1.out',
+        });
       },
     });
   });
@@ -234,6 +232,30 @@ function textEnter(text) {
 }
 
 //
+// about desc enter
+//
+function aboutEnter() {
+  const aboutDescText = document.querySelectorAll('.about__desc .text__mask');
+
+  aboutDescText.forEach((line) => {
+    const text = line.querySelectorAll('div');
+    gsap.set(text, { yPercent: 100 });
+
+    ScrollTrigger.create({
+      trigger: line,
+      start: 'top 70%',
+      onEnter: () => {
+        gsap.to(text, {
+          yPercent: 0,
+          duration: 0.8,
+          ease: 'power1.out',
+        });
+      },
+    });
+  });
+}
+
+//
 // call functions on load
 //
 window.addEventListener('load', () => {
@@ -244,4 +266,5 @@ window.addEventListener('load', () => {
   imageEnterScroll();
   textEnter(document.querySelectorAll('.hero__text div')[0]);
   textEnter(document.querySelectorAll('.hero__text div')[1]);
+  aboutEnter();
 });

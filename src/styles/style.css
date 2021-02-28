@@ -206,6 +206,10 @@ body.nav--open {
   overflow-y: hidden;
 }
 
+.text__mask {
+  overflow: hidden;
+}
+
 header {
   position: relative;
 }
@@ -438,10 +442,6 @@ header {
   padding-bottom: 0.5rem;
 }
 
-.project .project__title .text__mask {
-  overflow: hidden;
-}
-
 .project .project__img figure {
   height: 50vh;
   overflow: hidden;
@@ -502,12 +502,28 @@ header {
 .about {
   width: 80%;
   margin: 0 auto;
-  padding: 4rem 0;
+  padding: 8rem 0;
   text-align: center;
   text-transform: lowercase;
   font-style: italic;
   line-height: 1.5;
   font-size: var(--font-xs);
+}
+
+.about .about__desc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @media (min-width: 900px) {
