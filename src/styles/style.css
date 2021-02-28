@@ -379,6 +379,7 @@ header {
 .hero__img figure {
   height: 70vh;
   overflow: hidden;
+  position: absolute;
 }
 
 .hero__img figure img {
