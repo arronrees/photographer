@@ -1,4 +1,34 @@
 gsap.registerPlugin(ScrollTrigger);
+
+gsap.set('#scroll__content', { autoAlpha: 0 });
+
+function loaderAnimation() {
+  const tl = gsap.timeline({
+    defaults: {
+      duration: 1.2,
+      ease: 'power2.inOut',
+    },
+  });
+  const loaders = document.querySelectorAll('.loader');
+  const loaderWrapper = document.querySelector('.loader__wrapper');
+  const loaderText = document.querySelectorAll('.loader__text');
+  gsap.set(loaders, { scaleY: 0.01 });
+  gsap.set(loaderText, { yPercent: 100 });
+
+  tl.to(loaders, { scaleY: 1, stagger: 0.3 })
+    .to(loaderText, { yPercent: 0 })
+    .to([loaders, loaderText], { yPercent: 80 }, 2.4)
+    .to(
+      loaderWrapper,
+      {
+        yPercent: -100,
+        onComplete: () => gsap.set('#scroll__content', { autoAlpha: 1 }),
+      },
+      2.4
+    );
+}
+loaderAnimation();
+
 //
 // init smooth scrollbar
 //
@@ -171,7 +201,6 @@ function heroImageEnter() {
 
   const tl = gsap.timeline({
     defaults: { duration: 3, ease: 'power1.inOut' },
-    onComplete: () => start(),
   });
 
   tl.fromTo(
@@ -282,15 +311,15 @@ function aboutEnter() {
 // call functions on load
 //
 function start() {
-  navSlide();
-  navItemUnderline();
-  projectTitleEnter();
-  imageParallaxScroll('.hero__img img');
-  imageEnterScroll();
-  textEnter(document.querySelectorAll('.hero__text div')[0]);
-  textEnter(document.querySelectorAll('.hero__text div')[1]);
-  aboutEnter();
+  // navSlide();
+  // navItemUnderline();
+  // projectTitleEnter();
+  // imageParallaxScroll('.hero__img img');
+  // imageEnterScroll();
+  // textEnter(document.querySelectorAll('.hero__text div')[0]);
+  // textEnter(document.querySelectorAll('.hero__text div')[1]);
+  // aboutEnter();
 }
 window.addEventListener('load', () => {
-  heroImageEnter();
+  // heroImageEnter();
 });

@@ -5,14 +5,9 @@ header {
 .header__wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 2rem;
   height: 10vh;
-}
-
-.header__logo {
-  position: relative;
-  z-index: 6;
 }
 
 .burger__menu {
