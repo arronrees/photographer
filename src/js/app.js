@@ -176,6 +176,9 @@ function textReplacement(text) {
   gsap.set(span, { yPercent: 200 });
 }
 
+//
+// text replacement function, used on hero title
+//
 function textAnimation(text) {
   const span = text.querySelectorAll('span');
   let char = 0;
@@ -237,7 +240,9 @@ function heroImageEnter() {
 //
 // project title fade in on scroll
 //
+gsap.set('.project', { autoAlpha: 0 });
 function projectTitleEnter() {
+  gsap.set('.project', { autoAlpha: 1 });
   const projects = document.querySelectorAll('.project');
 
   projects.forEach((project) => {
