@@ -22,12 +22,14 @@ function loaderAnimation() {
       loaderWrapper,
       {
         yPercent: -100,
-        onComplete: () => gsap.set('#scroll__content', { autoAlpha: 1 }),
+        onComplete: () => {
+          gsap.set('#scroll__content', { autoAlpha: 1 });
+          start();
+        },
       },
       2.4
     );
 }
-loaderAnimation();
 
 //
 // init smooth scrollbar
@@ -62,6 +64,7 @@ if (window.innerWidth > 1024) {
 // nav slide
 //
 let navOpen = false;
+gsap.set('.main__nav', { yPercent: -100 });
 function navSlide() {
   const burger = document.querySelector('.burger__menu');
   const nav = document.querySelector('.main__nav');
@@ -69,8 +72,6 @@ function navSlide() {
   const body = document.body;
   const lines = document.querySelectorAll('.burger__menu .line');
   const main = document.querySelector('main');
-
-  gsap.set(nav, { yPercent: -100 });
 
   gsap.set(navItems, { yPercent: 200 });
 
@@ -157,7 +158,7 @@ function navItemUnderline() {
 //
 // hero name enter animation
 //
-function textEnter(text) {
+function textReplacement(text) {
   const textContent = text.textContent;
   const splitText = textContent.split('');
   text.textContent = '';
@@ -171,22 +172,25 @@ function textEnter(text) {
     }
   });
 
-  let char = 0;
   const span = text.querySelectorAll('span');
-  gsap.set(span, { autoAlpha: 0, yPercent: 100 });
+  gsap.set(span, { yPercent: 200 });
+}
+
+function textAnimation(text) {
+  const span = text.querySelectorAll('span');
+  let char = 0;
 
   const int = setInterval(() => {
     const currentSpan = span[char];
     gsap.to(currentSpan, {
       yPercent: 0,
-      autoAlpha: 1,
       duration: 0.8,
       ease: 'power1.out',
     });
 
     char++;
 
-    if (char === splitText.length) {
+    if (char === span.length) {
       clearInterval(int);
       return;
     }
@@ -200,7 +204,10 @@ function heroImageEnter() {
   const heroImg = document.querySelector('.hero__img figure');
 
   const tl = gsap.timeline({
-    defaults: { duration: 3, ease: 'power1.inOut' },
+    defaults: {
+      duration: 3,
+      ease: 'power1.inOut',
+    },
   });
 
   tl.fromTo(
@@ -212,7 +219,19 @@ function heroImageEnter() {
       width: '20rem',
     },
     { width: '100%', top: '70vh' }
-  ).to(heroImg, { top: 0, position: 'relative', duration: 0 });
+  ).to(heroImg, {
+    top: 0,
+    position: 'relative',
+    duration: 0,
+    onComplete: () => {
+      projectTitleEnter();
+      imageParallaxScroll('.hero__img img');
+      imageEnterScroll();
+      aboutEnter();
+      textAnimation(document.querySelectorAll('.hero__text div')[0]);
+      textAnimation(document.querySelectorAll('.hero__text div')[1]);
+    },
+  });
 }
 
 //
@@ -311,15 +330,12 @@ function aboutEnter() {
 // call functions on load
 //
 function start() {
-  // navSlide();
-  // navItemUnderline();
-  // projectTitleEnter();
-  // imageParallaxScroll('.hero__img img');
-  // imageEnterScroll();
-  // textEnter(document.querySelectorAll('.hero__text div')[0]);
-  // textEnter(document.querySelectorAll('.hero__text div')[1]);
-  // aboutEnter();
+  heroImageEnter();
 }
 window.addEventListener('load', () => {
-  // heroImageEnter();
+  loaderAnimation();
+  navSlide();
+  navItemUnderline();
+  textReplacement(document.querySelectorAll('.hero__text div')[0]);
+  textReplacement(document.querySelectorAll('.hero__text div')[1]);
 });
