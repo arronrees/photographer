@@ -30,8 +30,7 @@ header {
   width: 100vw;
   height: 100vh;
   z-index: 5;
-  background-color: var(--white);
-  box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
+  background-color: var(--grey);
 }
 
 .nav__menu {
@@ -45,6 +44,7 @@ header {
   text-transform: lowercase;
   font-style: italic;
   font-size: var(--font-md);
+  color: var(--white);
 
   .nav__item {
     padding: 2rem 0;
@@ -59,7 +59,7 @@ header {
       display: block;
       content: '';
       height: 2px;
-      background-color: var(--black);
+      background-color: var(--white);
       position: absolute;
       bottom: 0;
       width: 100%;

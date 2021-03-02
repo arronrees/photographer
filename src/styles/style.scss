@@ -6,8 +6,11 @@
 
 :root {
   --font-family: 'Playfair Display', serif;
+
   --black: #000;
   --white: #fff;
+  --gold: rgb(214, 162, 28);
+  --grey: rgb(41, 48, 58);
 
   --font-xs: 1rem;
   --font-sm: 1.5rem;
@@ -52,6 +55,7 @@ body {
   text-transform: uppercase;
   color: var(--black);
   overflow-x: hidden;
+  display: none;
 
   &.nav--open {
     overflow-y: hidden;

@@ -153,6 +153,8 @@ a {
   --font-family: 'Playfair Display', serif;
   --black: #000;
   --white: #fff;
+  --gold: rgb(214, 162, 28);
+  --grey: rgb(41, 48, 58);
   --font-xs: 1rem;
   --font-sm: 1.5rem;
   --font-md: 2rem;
@@ -200,6 +202,7 @@ body {
   text-transform: uppercase;
   color: var(--black);
   overflow-x: hidden;
+  display: none;
 }
 
 body.nav--open {
@@ -246,11 +249,11 @@ body.nav--open {
 }
 
 .loader__wrapper .loader1 {
-  background-color: #29303a;
+  background-color: var(--gold);
 }
 
 .loader__wrapper .loader2 {
-  background-color: #d6a21c;
+  background-color: var(--grey);
 }
 
 header {
@@ -291,9 +294,7 @@ header {
   width: 100vw;
   height: 100vh;
   z-index: 5;
-  background-color: var(--white);
-  -webkit-box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
-          box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.1);
+  background-color: var(--grey);
 }
 
 .nav__menu {
@@ -316,6 +317,7 @@ header {
   text-transform: lowercase;
   font-style: italic;
   font-size: var(--font-md);
+  color: var(--white);
 }
 
 .nav__menu .nav__item {
@@ -332,7 +334,7 @@ header {
   display: block;
   content: '';
   height: 2px;
-  background-color: var(--black);
+  background-color: var(--white);
   position: absolute;
   bottom: 0;
   width: 100%;

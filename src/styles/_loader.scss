@@ -25,9 +25,9 @@
     transform-origin: bottom;
   }
   .loader1 {
-    background-color: rgb(41, 48, 58);
+    background-color: var(--gold);
   }
   .loader2 {
-    background-color: rgb(214, 162, 28);
+    background-color: var(--grey);
   }
 }

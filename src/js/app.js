@@ -1,5 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
+gsap.set('body', { display: 'block' });
 gsap.set('#scroll__content', { autoAlpha: 0 });
 
 function loaderAnimation() {
@@ -102,6 +103,7 @@ function openNav(nav, navItems, lines, main) {
         duration: 0.2,
         rotate: -45,
         translateY: 3,
+        backgroundColor: 'var(--white)',
       },
       0
     )
@@ -111,6 +113,7 @@ function openNav(nav, navItems, lines, main) {
         duration: 0.2,
         rotate: 45,
         translateY: -3,
+        backgroundColor: 'var(--white)',
       },
       0
     )
@@ -133,6 +136,7 @@ function closeNav(nav, navItems, lines, main) {
         duration: 0.2,
         rotate: 0,
         translateY: 0,
+        backgroundColor: 'var(--black)',
       },
       0.7
     );
@@ -349,7 +353,7 @@ function start() {
   textAnimation(document.querySelectorAll('.hero__text div')[1]);
 }
 window.addEventListener('load', () => {
-  loaderAnimation();
   textReplacement(document.querySelectorAll('.hero__text div')[0]);
   textReplacement(document.querySelectorAll('.hero__text div')[1]);
+  loaderAnimation();
 });
