@@ -1,6 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.set('body', { display: 'block' });
 gsap.set('#scroll__content', { autoAlpha: 0 });
 
 function loaderAnimation() {
@@ -281,7 +280,7 @@ function imageEnterScroll() {
   const imageMask = document.querySelectorAll('.project figure');
 
   projects.forEach((el, i) => {
-    gsap.set(images, { yPercent: -120 });
+    gsap.set(images, { yPercent: -100 });
     gsap.set(imageMask, { yPercent: 100 });
     ScrollTrigger.create({
       trigger: el,
@@ -300,7 +299,7 @@ function imageEnterScroll() {
 }
 
 //
-// hero image parralax on scroll
+// images parralax on scroll
 //
 function imageParallaxScroll(image) {
   gsap.to(image, {
@@ -340,10 +339,43 @@ function aboutEnter() {
 }
 
 //
+// name marquee slider
+//
+function nameSlider() {
+  const boxWidth = 400;
+  const totalWidth = boxWidth * 7; //  * n of boxes
+  const text = document.querySelectorAll('.slider__text');
+  const dirFromLeft = '+=' + totalWidth;
+
+  const mod = gsap.utils.wrap(0, totalWidth);
+
+  function marquee(which, time, direction) {
+    gsap.set(which, {
+      x: (i) => {
+        return i * boxWidth;
+      },
+    });
+    const action = gsap.timeline().to(which, {
+      x: direction,
+      modifiers: {
+        x: (x) => mod(parseFloat(x)) + 'px',
+      },
+      duration: time,
+      ease: 'none',
+      repeat: -1,
+    });
+    return action;
+  }
+
+  const master = gsap.timeline().add(marquee(text, 25, dirFromLeft), 1);
+}
+
+//
 // call functions on load
 //
 function start() {
   navSlide();
+  nameSlider();
   navItemUnderline();
   projectTitleEnter();
   imageParallaxScroll('.hero__img img');
@@ -353,6 +385,7 @@ function start() {
   textAnimation(document.querySelectorAll('.hero__text div')[1]);
 }
 window.addEventListener('load', () => {
+  gsap.set('body', { display: 'block' });
   textReplacement(document.querySelectorAll('.hero__text div')[0]);
   textReplacement(document.querySelectorAll('.hero__text div')[1]);
   loaderAnimation();
