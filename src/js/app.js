@@ -24,7 +24,7 @@ function loaderAnimation() {
         yPercent: -100,
         onComplete: () => {
           gsap.set('#scroll__content', { autoAlpha: 1 });
-          start();
+          heroImageEnter();
         },
       },
       2.4
@@ -65,6 +65,7 @@ if (window.innerWidth > 1024) {
 //
 let navOpen = false;
 gsap.set('.main__nav', { yPercent: -100 });
+gsap.set('.burger__menu', { autoAlpha: 0, yPercent: -100 });
 function navSlide() {
   const burger = document.querySelector('.burger__menu');
   const nav = document.querySelector('.main__nav');
@@ -73,6 +74,7 @@ function navSlide() {
   const lines = document.querySelectorAll('.burger__menu .line');
   const main = document.querySelector('main');
 
+  gsap.to(burger, { autoAlpha: 1, yPercent: 0, duration: 0.8 });
   gsap.set(navItems, { yPercent: 200 });
 
   burger.addEventListener('click', () => {
@@ -203,7 +205,15 @@ function textAnimation(text) {
 //
 // hero image enter
 //
-gsap.set('.hero__img figure', { autoAlpha: 0 });
+gsap.set('.hero__img figure', {
+  autoAlpha: 0,
+  xPercent: -50,
+  top: '5%',
+  left: '50%',
+  width: '10rem',
+  height: '10rem',
+  borderRadius: '50%',
+});
 function heroImageEnter() {
   const heroImg = document.querySelector('.hero__img figure');
 
@@ -215,29 +225,18 @@ function heroImageEnter() {
   });
 
   tl.to(heroImg, { autoAlpha: 1, duration: 1 })
-    .fromTo(
-      heroImg,
-      {
-        xPercent: -50,
-        top: '5%',
-        left: '50%',
-        width: '10rem',
-        height: '10rem',
-        borderRadius: '50%',
-      },
-      { width: '100%', height: '110vh', top: '70vh', borderRadius: '0' }
-    )
+    .to(heroImg, {
+      width: '100%',
+      height: '110vh',
+      top: '70vh',
+      borderRadius: '0',
+    })
     .to(heroImg, {
       top: 0,
       position: 'relative',
       duration: 0,
       onComplete: () => {
-        projectTitleEnter();
-        imageParallaxScroll('.hero__img img');
-        imageEnterScroll();
-        aboutEnter();
-        textAnimation(document.querySelectorAll('.hero__text div')[0]);
-        textAnimation(document.querySelectorAll('.hero__text div')[1]);
+        start();
       },
     });
 }
@@ -340,12 +339,17 @@ function aboutEnter() {
 // call functions on load
 //
 function start() {
-  heroImageEnter();
+  navSlide();
+  navItemUnderline();
+  projectTitleEnter();
+  imageParallaxScroll('.hero__img img');
+  imageEnterScroll();
+  aboutEnter();
+  textAnimation(document.querySelectorAll('.hero__text div')[0]);
+  textAnimation(document.querySelectorAll('.hero__text div')[1]);
 }
 window.addEventListener('load', () => {
   loaderAnimation();
-  navSlide();
-  navItemUnderline();
   textReplacement(document.querySelectorAll('.hero__text div')[0]);
   textReplacement(document.querySelectorAll('.hero__text div')[1]);
 });
