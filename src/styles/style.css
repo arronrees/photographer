@@ -416,7 +416,7 @@ header {
 }
 
 .hero__img figure {
-  height: 70vh;
+  height: 110vh;
   overflow: hidden;
   position: absolute;
 }
@@ -430,24 +430,6 @@ header {
      object-position: center;
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
-}
-
-@media (min-width: 900px) {
-  .hero__img figure {
-    height: 80vh;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero__img figure {
-    height: 95vh;
-  }
-}
-
-@media (min-width: 1200px) {
-  .hero__img figure {
-    height: 110vh;
-  }
 }
 
 .projects {

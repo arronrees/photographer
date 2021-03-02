@@ -203,38 +203,43 @@ function textAnimation(text) {
 //
 // hero image enter
 //
+gsap.set('.hero__img figure', { autoAlpha: 0 });
 function heroImageEnter() {
   const heroImg = document.querySelector('.hero__img figure');
 
   const tl = gsap.timeline({
     defaults: {
-      duration: 3,
+      duration: 2.5,
       ease: 'power1.inOut',
     },
   });
 
-  tl.fromTo(
-    heroImg,
-    {
-      xPercent: -50,
-      top: '0',
-      left: '50%',
-      width: '20rem',
-    },
-    { width: '100%', top: '70vh' }
-  ).to(heroImg, {
-    top: 0,
-    position: 'relative',
-    duration: 0,
-    onComplete: () => {
-      projectTitleEnter();
-      imageParallaxScroll('.hero__img img');
-      imageEnterScroll();
-      aboutEnter();
-      textAnimation(document.querySelectorAll('.hero__text div')[0]);
-      textAnimation(document.querySelectorAll('.hero__text div')[1]);
-    },
-  });
+  tl.to(heroImg, { autoAlpha: 1, duration: 1 })
+    .fromTo(
+      heroImg,
+      {
+        xPercent: -50,
+        top: '5%',
+        left: '50%',
+        width: '10rem',
+        height: '10rem',
+        borderRadius: '50%',
+      },
+      { width: '100%', height: '110vh', top: '70vh', borderRadius: '0' }
+    )
+    .to(heroImg, {
+      top: 0,
+      position: 'relative',
+      duration: 0,
+      onComplete: () => {
+        projectTitleEnter();
+        imageParallaxScroll('.hero__img img');
+        imageEnterScroll();
+        aboutEnter();
+        textAnimation(document.querySelectorAll('.hero__text div')[0]);
+        textAnimation(document.querySelectorAll('.hero__text div')[1]);
+      },
+    });
 }
 
 //
