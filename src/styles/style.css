@@ -526,7 +526,7 @@ header {
 .about {
   width: 80%;
   margin: 0 auto;
-  padding: 16rem 0;
+  padding: 8rem 0;
   text-align: center;
   text-transform: lowercase;
   font-style: italic;
@@ -553,6 +553,12 @@ header {
 @media (min-width: 900px) {
   .about {
     font-size: var(--font-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .about {
+    padding: 16rem 0;
   }
 }
 
@@ -607,7 +613,11 @@ footer .footer__details {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 16rem 0;
+  padding: 8rem 0;
+}
+
+footer .footer__details .footer__info {
+  padding: 2rem 0;
 }
 
 @media (min-width: 1024px) {
@@ -617,6 +627,10 @@ footer .footer__details {
         -ms-flex-direction: row;
             flex-direction: row;
     font-size: var(--font-sm);
+    padding: 16rem 0;
+  }
+  footer .footer__details .footer__info {
+    padding: 0;
   }
 }
 /*# sourceMappingURL=style.css.map */

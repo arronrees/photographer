@@ -56,9 +56,6 @@ function initSmoothScrollbar() {
   // when the smooth scroller updates, tell ScrollTrigger to update() too:
   bodyScrollBar.addListener(ScrollTrigger.update);
 }
-if (window.innerWidth > 1024) {
-  initSmoothScrollbar();
-}
 
 //
 // nav slide
@@ -237,6 +234,9 @@ function heroImageEnter() {
       position: 'relative',
       duration: 0,
       onComplete: () => {
+        if (window.innerWidth > 1024) {
+          initSmoothScrollbar();
+        }
         start();
       },
     });
