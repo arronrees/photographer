@@ -616,6 +616,7 @@ footer .footer__details {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    font-size: var(--font-sm);
   }
 }
 /*# sourceMappingURL=style.css.map */

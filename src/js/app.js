@@ -214,8 +214,7 @@ gsap.set('.hero__img figure', {
   top: '5%',
   left: '50%',
   width: '10rem',
-  height: '10rem',
-  borderRadius: '50%',
+  height: '15rem',
 });
 function heroImageEnter() {
   const heroImg = document.querySelector('.hero__img figure');
@@ -232,7 +231,6 @@ function heroImageEnter() {
       width: '100%',
       height: '110vh',
       top: '70vh',
-      borderRadius: '0',
     })
     .to(heroImg, {
       top: 0,
@@ -371,6 +369,30 @@ function nameSlider() {
 }
 
 //
+// footer details enter
+//
+function footerDetailsEnter() {
+  const details = document.querySelectorAll('.footer__details .text__mask');
+
+  details.forEach((el) => {
+    const text = el.querySelector('.footer__info');
+    gsap.set(text, { yPercent: 100 });
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 85%',
+      onEnter: () => {
+        gsap.to(text, {
+          yPercent: 0,
+          duration: 0.6,
+          ease: 'power1.out',
+        });
+      },
+    });
+  });
+}
+
+//
 // call functions on load
 //
 function start() {
@@ -381,6 +403,7 @@ function start() {
   imageParallaxScroll('.hero__img img');
   imageEnterScroll();
   aboutEnter();
+  footerDetailsEnter();
   textAnimation(document.querySelectorAll('.hero__text div')[0]);
   textAnimation(document.querySelectorAll('.hero__text div')[1]);
 }
